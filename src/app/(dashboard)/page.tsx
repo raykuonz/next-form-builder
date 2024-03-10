@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 
-import { getFormStats } from '@/lib/actions/form';
+import { getFormStats } from '@/actions/form-actions';
 import { Separator } from '@/components/ui/separator';
 import CreateFormButton from '@/components/create-form-button';
 import StatsCardList from './_components/stats-card-list';
@@ -44,7 +44,11 @@ const DashboardHomePage = () => {
       <Separator
         className="my-8"
       />
-      <CreateFormButton />
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+      >
+        <CreateFormButton />
+      </div>
     </div>
   )
 }
