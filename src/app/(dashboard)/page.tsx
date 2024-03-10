@@ -4,6 +4,8 @@ import { getFormStats } from '@/actions/form-actions';
 import { Separator } from '@/components/ui/separator';
 import CreateFormButton from '@/components/create-form-button';
 import StatsCardList from './_components/stats-card-list';
+import FormCardList from './_components/form-card-list';
+import FormCard from './_components/form-card';
 
 const CardStatsWrapper = async () => {
 
@@ -45,9 +47,18 @@ const DashboardHomePage = () => {
         className="my-8"
       />
       <div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         <CreateFormButton />
+        <Suspense
+          fallback={[1, 2, 3, 4].map((el) => (
+            <FormCard.Skeleton
+              key={el}
+            />
+          ))}
+        >
+          <FormCardList />
+        </Suspense>
       </div>
     </div>
   )
