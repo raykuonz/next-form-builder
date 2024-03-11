@@ -10,7 +10,7 @@ const FormCardList = async () => {
       {forms.map((form) => (
         <FormCard
           key={form.id}
-          data={form}
+          form={form}
         />
       ))}
     </>

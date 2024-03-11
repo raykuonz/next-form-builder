@@ -5,7 +5,7 @@ import {
   ViewIcon
 } from "lucide-react";
 
-import { getFormStats } from "@/lib/actions/form";
+import { getFormStats } from "@/actions/form-actions";
 import StatsCard from "./stats-card";
 
 interface StatsCardListProps {

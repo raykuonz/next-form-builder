@@ -21,11 +21,11 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface FormCardProps {
-  data: Form;
+  form: Form;
 }
 
 const FormCard = ({
-  data
+  form
 }: FormCardProps) => {
   return (
     <Card>
@@ -36,25 +36,25 @@ const FormCard = ({
           <span
             className="truncate font-bold"
           >
-            {data.name}
+            {form.name}
           </span>
           <Badge
-            variant={data.published ? 'default' : 'destructive'}
+            variant={form.published ? 'default' : 'destructive'}
           >
-            {data.published ? 'Published' : 'Draft'}
+            {form.published ? 'Published' : 'Draft'}
           </Badge>
         </CardTitle>
         <CardDescription
         	className="flex items-center justify-between text-muted-foreground text-sm"
         >
           {formatDistance(
-            data.createdAt,
+            form.createdAt,
             new Date(),
             {
               addSuffix: true,
             }
           )}
-          {data.published && (
+          {form.published && (
             <span
               className="flex items-center gap-2"
             >
@@ -62,13 +62,13 @@ const FormCard = ({
                 className="text-muted-foreground"
               />
               <span>
-                {data.visits.toLocaleString()}
+                {form.visits.toLocaleString()}
               </span>
               <MousePointerClickIcon
                 className="text-muted-foreground"
               />
               <span>
-                {data.submissions.toLocaleString()}
+                {form.submissions.toLocaleString()}
               </span>
             </span>
           )}
@@ -77,16 +77,16 @@ const FormCard = ({
       <CardContent
         className="h-[20px] truncate text-sm text-muted-foreground"
       >
-        {data.description || 'No description.'}
+        {form.description || 'No description.'}
       </CardContent>
       <CardFooter>
-        {data.published ? (
+        {form.published ? (
           <Button
             asChild
             className="w-full mt-2 text-md"
           >
             <Link
-              href={`/forms/${data.id}`}
+              href={`/forms/${form.id}`}
             >
               View submissions
               <ArrowRight
@@ -101,7 +101,7 @@ const FormCard = ({
             className="w-full mt-2 text-md"
           >
             <Link
-              href={`/builder/${data.id}`}
+              href={`/builder/${form.id}`}
             >
               Edit form
               <Edit2Icon
