@@ -17,7 +17,9 @@ export type FormElement = {
   designerComponent: FC<{
     elementInstance: FormElementInstance;
   }>;
-  formComponent: FC;
+  formComponent: FC<{
+    elementInstance: FormElementInstance;
+  }>;
   propertiesComponent: FC<{
     elementInstance: FormElementInstance;
   }>;

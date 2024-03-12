@@ -6,6 +6,7 @@ import {
 } from "@/lib/types"
 import DesignerComponent from "./designer-component";
 import PropertiesComponent from "./properties-component";
+import FormComponent from "./form-component";
 
 const type: ElementsType = 'TextField';
 
@@ -28,7 +29,7 @@ const TextField: FormElement = {
     label: 'Text field'
   },
   designerComponent: DesignerComponent,
-  formComponent: () => <div>Form component</div>,
+  formComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
 }
 

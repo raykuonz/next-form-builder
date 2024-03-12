@@ -1,11 +1,11 @@
 import {
   FormElementInstance,
   TextFieldInstance,
-} from "@/lib/types";
+} from "@/lib/types"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const DesignerComponent = ({
+const FormComponent = ({
   elementInstance,
 }: {
   elementInstance: FormElementInstance;
@@ -29,8 +29,6 @@ const DesignerComponent = ({
         {required && '*'}
       </Label>
       <Input
-        readOnly
-        disabled
         placeholder={placeholder}
       />
       {helperText && (
@@ -44,4 +42,4 @@ const DesignerComponent = ({
   );
 }
 
-export default DesignerComponent;
+export default FormComponent

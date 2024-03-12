@@ -5,7 +5,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-import { TextFieldInstance } from "@/lib/types";
+import {
+  FormElementInstance,
+  TextFieldInstance,
+} from "@/lib/types";
 import useDesigner from "@/hooks/use-designer";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
@@ -29,10 +32,12 @@ const propertiesSchema = z.object({
 type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 
 const PropertiesComponent = ({
-  elementInstance: element
+  elementInstance,
 }: {
-  elementInstance: TextFieldInstance;
+  elementInstance: FormElementInstance;
 }) => {
+
+  const element = elementInstance as TextFieldInstance;
 
   const {
     label,
