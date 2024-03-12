@@ -28,3 +28,14 @@ export type FormElementInstance = {
   type: ElementsType;
   extraAttributes?: Record<string, any>;
 }
+
+export type TextFieldExtraAttributes = {
+  label: string;
+  helperText: string;
+  required: boolean,
+  placeholder: string;
+}
+
+export type TextFieldInstance = FormElementInstance & {
+  extraAttributes: TextFieldExtraAttributes;
+}

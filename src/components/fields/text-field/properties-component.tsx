@@ -1,16 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import { TypeIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-import { ElementsType, FormElement, FormElementInstance } from "@/lib/types"
+import { TextFieldInstance } from "@/lib/types";
 import useDesigner from "@/hooks/use-designer";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { Switch } from "../ui/switch";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 import {
   Form,
   FormControl,
@@ -18,17 +16,8 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
-} from "../ui/form";
-
-const type: ElementsType = 'TextField';
-
-const extraAttributes = {
-  label: 'Text field',
-  helperText: 'Helper text',
-  required: false,
-  placeholder: 'Placeholder value'
-}
+  FormMessage
+} from "@/components/ui/form";
 
 const propertiesSchema = z.object({
   label: z.string().min(2).max(50),
@@ -39,56 +28,11 @@ const propertiesSchema = z.object({
 
 type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 
-type CustomInstance = FormElementInstance & {
-  extraAttributes: typeof extraAttributes;
-}
-
-const DesignerComponent = ({
-  elementInstance
-}: {
-  elementInstance: FormElementInstance;
-}) => {
-
-  const element = elementInstance as CustomInstance;
-
-  const {
-    label,
-    helperText,
-    required,
-    placeholder,
-  } = element.extraAttributes;
-
-  return (
-    <div
-      className="flex flex-col gap-2 w-full"
-    >
-      <Label>
-        {label}
-        {required && '*'}
-      </Label>
-      <Input
-        readOnly
-        disabled
-        placeholder={placeholder}
-      />
-      {helperText && (
-        <p
-          className="text-muted-foreground text-[0.8rem]"
-        >
-          {helperText}
-        </p>
-      )}
-    </div>
-  );
-}
-
 const PropertiesComponent = ({
-  elementInstance
+  elementInstance: element
 }: {
-  elementInstance: FormElementInstance;
+  elementInstance: TextFieldInstance;
 }) => {
-
-  const element = elementInstance as CustomInstance;
 
   const {
     label,
@@ -237,20 +181,4 @@ const PropertiesComponent = ({
   );
 }
 
-const TextField: FormElement = {
-  type,
-  construct: (id: string) => ({
-    id,
-    type,
-    extraAttributes,
-  }),
-  designerButtonElement: {
-    icon: TypeIcon,
-    label: 'Text field'
-  },
-  designerComponent: DesignerComponent,
-  formComponent: () => <div>Form component</div>,
-  propertiesComponent: PropertiesComponent,
-}
-
-export default TextField;
+export default PropertiesComponent;

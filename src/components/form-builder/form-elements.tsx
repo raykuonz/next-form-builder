@@ -1,5 +1,5 @@
 import { ElementsType, FormElement } from "@/lib/types"
-import TextField from "../fields/text-field"
+import TextField from "../fields/text-field";
 
 type FormElementsType = {
   [key in ElementsType]: FormElement;
