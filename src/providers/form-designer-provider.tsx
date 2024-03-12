@@ -12,6 +12,8 @@ import { FormElementInstance } from "@/lib/types";
 
 interface FormDesignerContextProps {
   elements: FormElementInstance[];
+  setElements: Dispatch<SetStateAction<FormElementInstance[]>>;
+
   addElement: (index: number, element: FormElementInstance) => void;
   removeElement: (id: string) => void;
 
@@ -61,6 +63,7 @@ const FormDesignerProvider = ({
     <FormDesignerContext.Provider
       value={{
         elements,
+        setElements,
         addElement,
         removeElement,
         selectedElement,

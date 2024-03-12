@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Form } from "@prisma/client";
 import {
   DndContext,
@@ -8,7 +9,9 @@ import {
   useSensor,
   useSensors
 } from "@dnd-kit/core";
+import { Loader2Icon } from "lucide-react";
 
+import useDesigner from "@/hooks/use-designer";
 import PreviewDialogButton from "./preview-dialog-button";
 import SaveFormButton from "./save-form-button";
 import PublishFormbutton from "./publish-form-button";
@@ -22,6 +25,9 @@ interface FormBuilderProps {
 const FormBuilder = ({
   form
 }: FormBuilderProps) => {
+
+  const { setElements } = useDesigner();
+  const [isMounteed, setIsMounted] = useState<boolean>(false);
 
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -37,6 +43,28 @@ const FormBuilder = ({
   });
 
   const sensors = useSensors(mouseSensor, touchSensor);
+
+  useEffect(() => {
+
+    if (isMounteed) return;
+
+    const elements = JSON.parse(form.content);
+    setElements(elements);
+    setIsMounted(true);
+  }, [form, setElements, isMounteed])
+
+
+  if (!isMounteed) {
+    return (
+      <div
+        className="flex w-full items-center justify-center"
+      >
+        <Loader2Icon
+          className="h-12 w-12 animate-spin"
+        />
+      </div>
+    );
+  }
 
   return (
     <DndContext
@@ -62,7 +90,9 @@ const FormBuilder = ({
             <PreviewDialogButton />
             {!form.published && (
               <>
-                <SaveFormButton />
+                <SaveFormButton
+                  formId={form.id}
+                />
                 <PublishFormbutton />
               </>
             )}
