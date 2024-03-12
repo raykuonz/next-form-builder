@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Form } from "@prisma/client";
 import {
   DndContext,
@@ -9,7 +10,14 @@ import {
   useSensor,
   useSensors
 } from "@dnd-kit/core";
-import { Loader2Icon } from "lucide-react";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CopyIcon,
+  Loader2Icon,
+} from "lucide-react";
+import Confetti from "react-confetti";
+import { toast } from "sonner";
 
 import useDesigner from "@/hooks/use-designer";
 import PreviewDialogButton from "./preview-dialog-button";
@@ -17,6 +25,8 @@ import SaveFormButton from "./save-form-button";
 import PublishFormbutton from "./publish-form-button";
 import Designer from "./designer";
 import DragOverlayWrapper from "./drag-overlay-wrapper";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 interface FormBuilderProps {
   form: Form;
@@ -66,6 +76,102 @@ const FormBuilder = ({
     );
   }
 
+
+  if (form.published) {
+
+    const shareUrl = `${window.location.origin}/submit/${form.shareUrl}`;
+
+    return (
+      <>
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          recycle={false}
+        />
+        <div
+          className="flex flex-col items-center justify-center w-full h-full"
+        >
+          <div
+            className="max-w-md"
+          >
+            <h1
+              className="text-center text-4xl font-bold text-primary border-b pb-2 mb-10"
+            >
+              🎉 Form published 🎉
+            </h1>
+            <p
+              className="text-2xl"
+            >
+              Share this form
+            </p>
+            <p
+              className="text-xl text-muted-foreground border-b pb-10"
+            >
+              Anyone with the link can view and submit the form.
+            </p>
+            <div
+              className="my-4 flex flex-col gap-2 items-center w-full border-b pb-4"
+            >
+              <Input
+                className="w-full"
+                readOnly
+                value={shareUrl}
+              />
+              <Button
+                className="w-full"
+                onClick={() => {
+                  try {
+                    navigator.clipboard.writeText(shareUrl);
+                    toast.success('Link copied.');
+                  } catch (error) {
+                    toast.error('Link copy failed.')
+                  }
+                }}
+              >
+                <CopyIcon
+                  className="w-4 h-4 mr-2"
+                />
+                Copy link
+              </Button>
+            </div>
+            <div
+              className="flex justify-between"
+            >
+              <Button
+                variant="link"
+                asChild
+              >
+                <Link
+                  href="/"
+                  className="gap-2"
+                >
+                  <ArrowLeftIcon
+                    className="w-4 h-4"
+                  />
+                  Go back home
+                </Link>
+              </Button>
+              <Button
+                variant="link"
+                asChild
+              >
+                <Link
+                  href={`/forms/${form.id}`}
+                  className="gap-2"
+                >
+                  Form details
+                  <ArrowRightIcon
+                    className="w-4 h-4"
+                  />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <DndContext
       sensors={sensors}
@@ -93,7 +199,9 @@ const FormBuilder = ({
                 <SaveFormButton
                   formId={form.id}
                 />
-                <PublishFormbutton />
+                <PublishFormbutton
+                  formId={form.id}
+                />
               </>
             )}
           </div>
