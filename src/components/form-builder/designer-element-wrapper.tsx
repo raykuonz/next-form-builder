@@ -65,7 +65,10 @@ const DesignerElementWrapper = ({
       ref={draggable.setNodeRef}
       {...draggable.listeners}
       {...draggable.attributes}
-      className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset"
+      className={cn(
+        "relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset",
+        (selectedElement?.id === element.id) && "ring-2 ring-primary",
+      )}
       onMouseEnter={() => {
         setMouseIsOver(true);
       }}

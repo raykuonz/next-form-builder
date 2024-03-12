@@ -19,6 +19,7 @@ const Designer = () => {
   const {
      elements,
      addElement,
+     removeElement,
      selectedElement,
      setSelectedElement,
   } = useDesigner();
@@ -37,18 +38,75 @@ const Designer = () => {
 
       if (!active || !over) return;
 
-      const isSidebarButtonElement = active?.data?.current?.isDesignerButtonElement;
+      const isDraggingSidebarButtonElement = active?.data?.current?.isDesignerButtonElement;
+      const isDraggingDesignerElement = active?.data?.current?.isDesignerElement;
 
-      if (isSidebarButtonElement) {
+      const isDroppingOverDesignerDropArea = over?.data?.current?.isDesignerDropArea;
+      const isDroppingOverDesignerElementTopHalf = over?.data?.current?.isTopHalfDesignerElement;
+      const isDroppingOverDesignerElementBottomHalf = over?.data?.current?.isBottomHalfDesignerElement;
+      const isDroppingOverDesignerElement =
+        isDroppingOverDesignerElementTopHalf
+        || isDroppingOverDesignerElementBottomHalf;
+
+      // First scenario: dropping a sidebar button element over the designer drop area
+      if (isDraggingSidebarButtonElement && isDroppingOverDesignerDropArea) {
         const type = active.data.current?.type;
         const newElement = FormElements[type as ElementsType].construct(
           idGenerator()
         );
 
-        addElement(0, newElement);
-
+        addElement(elements.length, newElement);
       }
 
+      // Second scenario: dropping a sidebar button element over the designer element
+      if (isDraggingSidebarButtonElement && isDroppingOverDesignerElement) {
+        const type = active.data.current?.type;
+        const newElement = FormElements[type as ElementsType].construct(
+          idGenerator()
+        );
+
+        const overElementIndex = elements.findIndex((element) => element.id === over.data.current?.elementId);
+
+        if (overElementIndex === -1) {
+          throw new Error('Element not found');
+        }
+
+        let newElementIndex = overElementIndex;
+
+        if (isDroppingOverDesignerElementBottomHalf) {
+          newElementIndex++;
+        }
+
+        addElement(newElementIndex, newElement);
+      }
+
+      // Third scenario: Dragging an designer element over another designer element
+      if (isDraggingDesignerElement && isDroppingOverDesignerElement) {
+
+        const activeElementId = active.data.current?.elementId;
+
+        const activeElementIndex = elements.findIndex((element) => element.id === activeElementId);
+
+        const overElementIndex = elements.findIndex((element) => element.id === over.data.current?.elementId);
+
+        if (activeElementIndex === -1 || overElementIndex === -1) {
+          throw new Error('Element not found');
+        }
+
+        const activeElement = {...elements[activeElementIndex]};
+
+        removeElement(activeElementId);
+
+        let newElementIndex = overElementIndex > activeElementIndex
+          ? overElementIndex - 1
+          : overElementIndex;
+
+        if (isDroppingOverDesignerElementBottomHalf) {
+          newElementIndex++;
+        }
+
+        addElement(newElementIndex, activeElement);
+      }
     },
   })
 
@@ -68,7 +126,7 @@ const Designer = () => {
           ref={droppable.setNodeRef}
           className={cn(
             "bg-background max-w-[920px] h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
-            droppable.isOver && "ring-2 ring-primary/20",
+            droppable.isOver && "ring-4 ring-primary ring-inset",
           )}
         >
           {!droppable.isOver && elements.length === 0 && (
