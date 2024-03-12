@@ -4,7 +4,7 @@ import { useDraggable } from "@dnd-kit/core";
 
 import { FormElement } from "@/lib/types"
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 interface SidebarButtonElementProps {
   formElement: FormElement;
@@ -69,4 +69,4 @@ SidebarButtonElement.DragOverlay = function SidebarButtonElementDragOverlay({
   )
 }
 
-export default SidebarButtonElement
+export default SidebarButtonElement;

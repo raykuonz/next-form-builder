@@ -23,7 +23,11 @@ const DesignerElementWrapper = ({
 
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
 
-  const { removeElement } = useDesigner();
+  const {
+    removeElement,
+    selectedElement,
+    setSelectedElement,
+  } = useDesigner();
 
   const topHalf = useDroppable({
     id: element.id + '-top',
@@ -67,6 +71,10 @@ const DesignerElementWrapper = ({
       }}
       onMouseLeave={() => {
         setMouseIsOver(false);
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        setSelectedElement(element);
       }}
     >
       <div

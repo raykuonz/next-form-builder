@@ -9,7 +9,7 @@ import {
 
 import { ElementsType } from '@/lib/types';
 import useDesigner from '@/hooks/use-designer';
-import SidebarButtonElement from './sidebar-button-element';
+import SidebarButtonElement from './form-builder-sidebar/sidebar-button-element';
 import FormElements from './form-elements';
 import DesignerElementWrapper from './designer-element-wrapper';
 

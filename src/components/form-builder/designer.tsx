@@ -6,17 +6,22 @@ import {
   useDroppable
 } from "@dnd-kit/core";
 
-import DesignerSidebar from "./designer-sidebar";
 import { cn } from "@/lib/utils";
 import { ElementsType } from "@/lib/types";
 import useDesigner from "@/hooks/use-designer";
 import FormElements from "./form-elements";
 import { idGenerator } from "@/lib/idGenerator";
 import DesignerElementWrapper from "./designer-element-wrapper";
+import DesignerSidebar from "./form-builder-sidebar/designer-sidebar";
 
 const Designer = () => {
 
-  const { elements, addElement } = useDesigner();
+  const {
+     elements,
+     addElement,
+     selectedElement,
+     setSelectedElement,
+  } = useDesigner();
 
   const droppable = useDroppable({
     id: 'designer-drop-area',
@@ -53,6 +58,11 @@ const Designer = () => {
     >
       <div
         className="w-full p-4"
+        onClick={() => {
+          if (selectedElement) {
+            setSelectedElement(null);
+          }
+        }}
       >
         <div
           ref={droppable.setNodeRef}

@@ -14,12 +14,13 @@ export type FormElement = {
     icon: ElementType;
     label: string;
   };
-
   designerComponent: FC<{
     elementInstance: FormElementInstance;
   }>;
   formComponent: FC;
-  propertiesComponent: FC;
+  propertiesComponent: FC<{
+    elementInstance: FormElementInstance;
+  }>;
 }
 
 export type FormElementInstance = {
