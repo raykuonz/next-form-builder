@@ -79,7 +79,7 @@ const FormBuilder = ({
 
   if (form.published) {
 
-    const shareUrl = `${window.location.origin}/submit/${form.shareUrl}`;
+    const shareUrl = `${window.location.origin}/form/${form.shareUrl}`;
 
     return (
       <>

@@ -86,7 +86,7 @@ const FormCard = ({
             className="w-full mt-2 text-md"
           >
             <Link
-              href={`/forms/${form.id}`}
+              href={`/report/${form.id}`}
             >
               View submissions
               <ArrowRight
