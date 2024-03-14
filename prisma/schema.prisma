@@ -26,7 +26,7 @@ model Form {
   visits      Int @default(0)
   submissions Int @default(0)
 
-  shareUrl String @default(uuid())
+  shareUrl String @unique @default(uuid())
 
   formSubmissions FormSubmission[]
 
@@ -38,5 +38,5 @@ model FormSubmission {
   createdAt DateTime @default(now())
   formId    Int
   form      Form     @relation(fields: [formId], references: [id])
-  contenet  String
+  content   String
 }

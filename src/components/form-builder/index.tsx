@@ -156,7 +156,7 @@ const FormBuilder = ({
                 asChild
               >
                 <Link
-                  href={`/forms/${form.id}`}
+                  href={`/report/${form.id}`}
                   className="gap-2"
                 >
                   Form details

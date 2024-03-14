@@ -113,6 +113,30 @@ export const getFormById = async (formId: number) => {
   return userForm;
 }
 
+export const getFormByPublicId = async (formPublicId: string) => {
+  const form = await prisma.form.update({
+    select: {
+      name: true,
+      description: true,
+      content: true,
+    },
+    data: {
+      visits: {
+        increment: 1,
+      }
+    },
+    where: {
+      shareUrl: formPublicId,
+    }
+  });
+
+  if (!form) {
+    throw new Error('Form not found');
+  }
+
+  return form;
+}
+
 export const updateFormContent = async (formId: number, jsonContent: string) => {
 
   const user = await currentUser();
@@ -148,4 +172,23 @@ export const publishForm = async (formId: number) => {
       published: true,
     }
   })
+}
+
+export const submitForm = async (formPublicId: string, content: string) => {
+
+  return prisma.form.update({
+    data: {
+      submissions: {
+        increment: 1,
+      },
+      formSubmissions: {
+        create: {
+          content,
+        }
+      }
+    },
+    where: {
+      shareUrl: formPublicId,
+    }
+  });
 }

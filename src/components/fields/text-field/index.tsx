@@ -2,7 +2,9 @@ import { TypeIcon } from "lucide-react";
 
 import {
   ElementsType,
-  FormElement
+  FormElement,
+  FormElementInstance,
+  TextFieldInstance
 } from "@/lib/types"
 import DesignerComponent from "./designer-component";
 import PropertiesComponent from "./properties-component";
@@ -31,6 +33,16 @@ const TextField: FormElement = {
   designerComponent: DesignerComponent,
   formComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
+
+  checkValidity: (formElement: FormElementInstance, value: string): boolean => {
+    const element = formElement as TextFieldInstance;
+
+    if (element.extraAttributes.required) {
+      return value.length > 0;
+    }
+
+    return true;
+  },
 }
 
 export default TextField;

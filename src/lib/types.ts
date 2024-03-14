@@ -5,6 +5,8 @@ import {
 
 export type ElementsType = 'TextField';
 
+export type OnValueChangeFunctionType = (key: string, value: string) => void;
+
 export type FormElement = {
   type: ElementsType;
 
@@ -19,10 +21,15 @@ export type FormElement = {
   }>;
   formComponent: FC<{
     elementInstance: FormElementInstance;
+    isInvalid?: boolean;
+    defaultValue?: string;
+    onValueChange?: OnValueChangeFunctionType;
   }>;
   propertiesComponent: FC<{
     elementInstance: FormElementInstance;
   }>;
+
+  checkValidity: (formElement: FormElementInstance, value: string) => boolean;
 }
 
 export type FormElementInstance = {
