@@ -16,6 +16,10 @@ const ReportPage = async ({
 
   const form = await getFormById(parseInt(params.formId));
 
+  if (!form) {
+    throw new Error('Form not found');
+  }
+
   const visits = form.visits || 0;
   const submissions = form.submissions || 0;
 
