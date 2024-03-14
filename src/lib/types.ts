@@ -3,7 +3,13 @@ import {
   FC
 } from "react";
 
-export type ElementsType = 'TextField' | 'TitleField' | 'SubTitleField' | 'ParagraphField';
+export type ElementsType =
+  | 'TextField'
+  | 'TitleField'
+  | 'SubTitleField'
+  | 'ParagraphField'
+  | 'SeparatorField'
+  | 'SpacerField';
 
 export type OnValueChangeFunctionType = (key: string, value: string) => void;
 
@@ -71,4 +77,12 @@ export type ParagraphFieldExtraAttributes = {
 
 export type ParagraphFieldInstance = FormElementInstance & {
   extraAttributes: ParagraphFieldExtraAttributes;
+}
+
+export type SpacerFieldExtraAttributes = {
+  height: number;
+}
+
+export type SpacerFieldInstance = FormElementInstance & {
+  extraAttributes: SpacerFieldExtraAttributes;
 }
