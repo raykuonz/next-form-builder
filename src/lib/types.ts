@@ -9,9 +9,11 @@ export type ElementsType =
   | 'SubTitleField'
   | 'ParagraphField'
   | 'SeparatorField'
-  | 'SpacerField';
+  | 'SpacerField'
+  | 'NumberField'
+  | 'TextAreaField';
 
-export type OnValueChangeFunctionType = (key: string, value: string) => void;
+export type OnValueChangeFunctionType = (key: string, value: string | number) => void;
 
 export type FormElement = {
   type: ElementsType;
@@ -35,7 +37,7 @@ export type FormElement = {
     elementInstance: FormElementInstance;
   }>;
 
-  checkValidity?: (formElement: FormElementInstance, value: string) => boolean;
+  checkValidity: (formElement: FormElementInstance, value: string) => boolean;
 }
 
 export type FormElementInstance = {
@@ -53,6 +55,29 @@ export type TextFieldExtraAttributes = {
 
 export type TextFieldInstance = FormElementInstance & {
   extraAttributes: TextFieldExtraAttributes;
+}
+
+export type TextAreaFieldExtraAttributes = {
+  label: string;
+  helperText: string;
+  required: boolean,
+  placeholder: string;
+  rows: number;
+}
+
+export type TextAreaFieldInstance = FormElementInstance & {
+  extraAttributes: TextAreaFieldExtraAttributes;
+}
+
+export type NumberFieldExtraAttributes = {
+  label: string;
+  helperText: string;
+  required: boolean,
+  placeholder: string;
+}
+
+export type NumberFieldInstance = FormElementInstance & {
+  extraAttributes: NumberFieldExtraAttributes;
 }
 
 export type TitleFieldExtraAttributes = {
