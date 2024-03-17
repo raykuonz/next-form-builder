@@ -50,6 +50,9 @@ const FormElementsSidebar = () => {
         <SidebarButtonElement
           formElement={FormElements.TextAreaField}
         />
+        <SidebarButtonElement
+          formElement={FormElements.DateField}
+        />
       </div>
     </div>
   )

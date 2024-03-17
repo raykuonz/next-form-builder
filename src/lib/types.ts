@@ -11,7 +11,8 @@ export type ElementsType =
   | 'SeparatorField'
   | 'SpacerField'
   | 'NumberField'
-  | 'TextAreaField';
+  | 'TextAreaField'
+  | 'DateField';
 
 export type OnValueChangeFunctionType = (key: string, value: string | number) => void;
 
@@ -78,6 +79,16 @@ export type NumberFieldExtraAttributes = {
 
 export type NumberFieldInstance = FormElementInstance & {
   extraAttributes: NumberFieldExtraAttributes;
+}
+
+export type DateFieldExtraAttributes = {
+  label: string;
+  helperText: string;
+  required: boolean,
+}
+
+export type DateFieldInstance = FormElementInstance & {
+  extraAttributes: DateFieldExtraAttributes;
 }
 
 export type TitleFieldExtraAttributes = {
