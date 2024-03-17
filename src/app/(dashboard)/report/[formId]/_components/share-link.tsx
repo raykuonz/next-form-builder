@@ -37,7 +37,7 @@ const ShareLink = ({
       <Button
         onClick={() => {
           try {
-            navigator.clipboard.writeText(shareUrl);
+            navigator.clipboard.writeText(shareLink);
             toast.success('Link copied.');
           } catch (error) {
             toast.error('Link copy failed.')

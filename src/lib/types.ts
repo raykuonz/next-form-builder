@@ -16,7 +16,7 @@ export type ElementsType =
   | 'SelectField'
   | 'CheckboxField';
 
-export type OnValueChangeFunctionType = (key: string, value: string | number) => void;
+export type OnValueChangeFunctionType = (key: string, value: string) => void;
 
 export type FormElement = {
   type: ElementsType;
