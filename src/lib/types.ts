@@ -12,7 +12,8 @@ export type ElementsType =
   | 'SpacerField'
   | 'NumberField'
   | 'TextAreaField'
-  | 'DateField';
+  | 'DateField'
+  | 'SelectField';
 
 export type OnValueChangeFunctionType = (key: string, value: string | number) => void;
 
@@ -89,6 +90,18 @@ export type DateFieldExtraAttributes = {
 
 export type DateFieldInstance = FormElementInstance & {
   extraAttributes: DateFieldExtraAttributes;
+}
+
+export type SelectFieldExtraAttributes = {
+  label: string;
+  helperText: string;
+  required: boolean,
+  placeholder: string;
+  options: string[];
+}
+
+export type SelectFieldInstance = FormElementInstance & {
+  extraAttributes: SelectFieldExtraAttributes;
 }
 
 export type TitleFieldExtraAttributes = {

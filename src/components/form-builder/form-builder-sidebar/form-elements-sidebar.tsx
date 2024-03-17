@@ -53,6 +53,9 @@ const FormElementsSidebar = () => {
         <SidebarButtonElement
           formElement={FormElements.DateField}
         />
+        <SidebarButtonElement
+          formElement={FormElements.SelectField}
+        />
       </div>
     </div>
   )
