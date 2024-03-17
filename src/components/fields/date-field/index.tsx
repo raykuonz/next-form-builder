@@ -1,10 +1,10 @@
 import { CalendarDaysIcon } from "lucide-react";
 
 import {
+  DateFieldInstance,
   ElementsType,
   FormElement,
   FormElementInstance,
-  TextFieldInstance
 } from "@/lib/types"
 import DesignerComponent from "./designer-component";
 import PropertiesComponent from "./properties-component";
@@ -34,7 +34,7 @@ const DateField: FormElement = {
   propertiesComponent: PropertiesComponent,
 
   checkValidity: (formElement: FormElementInstance, value: string): boolean => {
-    const element = formElement as TextFieldInstance;
+    const element = formElement as DateFieldInstance;
 
     if (element.extraAttributes.required) {
       return value.length > 0;

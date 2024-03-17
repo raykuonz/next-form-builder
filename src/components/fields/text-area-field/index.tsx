@@ -4,7 +4,7 @@ import {
   ElementsType,
   FormElement,
   FormElementInstance,
-  TextFieldInstance
+  TextAreaFieldInstance,
 } from "@/lib/types"
 import DesignerComponent from "./designer-component";
 import PropertiesComponent from "./properties-component";
@@ -36,7 +36,7 @@ const TextAreaField: FormElement = {
   propertiesComponent: PropertiesComponent,
 
   checkValidity: (formElement: FormElementInstance, value: string): boolean => {
-    const element = formElement as TextFieldInstance;
+    const element = formElement as TextAreaFieldInstance;
 
     if (element.extraAttributes.required) {
       return value.length > 0;
