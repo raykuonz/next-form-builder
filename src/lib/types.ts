@@ -13,7 +13,8 @@ export type ElementsType =
   | 'NumberField'
   | 'TextAreaField'
   | 'DateField'
-  | 'SelectField';
+  | 'SelectField'
+  | 'CheckboxField';
 
 export type OnValueChangeFunctionType = (key: string, value: string | number) => void;
 
@@ -102,6 +103,16 @@ export type SelectFieldExtraAttributes = {
 
 export type SelectFieldInstance = FormElementInstance & {
   extraAttributes: SelectFieldExtraAttributes;
+}
+
+export type CheckboxFieldExtraAttributes = {
+  label: string;
+  helperText: string;
+  required: boolean;
+}
+
+export type CheckboxFieldInstance = FormElementInstance & {
+  extraAttributes: CheckboxFieldExtraAttributes;
 }
 
 export type TitleFieldExtraAttributes = {

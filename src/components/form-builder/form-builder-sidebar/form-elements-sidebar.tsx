@@ -56,6 +56,9 @@ const FormElementsSidebar = () => {
         <SidebarButtonElement
           formElement={FormElements.SelectField}
         />
+        <SidebarButtonElement
+          formElement={FormElements.CheckboxField}
+        />
       </div>
     </div>
   )
