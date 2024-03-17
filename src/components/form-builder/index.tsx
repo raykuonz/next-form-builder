@@ -36,8 +36,8 @@ const FormBuilder = ({
   form
 }: FormBuilderProps) => {
 
-  const { setElements } = useDesigner();
-  const [isMounteed, setIsMounted] = useState<boolean>(false);
+  const { setElements, setSelectedElement } = useDesigner();
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -56,15 +56,15 @@ const FormBuilder = ({
 
   useEffect(() => {
 
-    if (isMounteed) return;
-
+    if (isMounted) return;
+    setSelectedElement(null);
     const elements = JSON.parse(form.content);
     setElements(elements);
     setIsMounted(true);
-  }, [form, setElements, isMounteed])
+  }, [form, setElements, isMounted, setSelectedElement])
 
 
-  if (!isMounteed) {
+  if (!isMounted) {
     return (
       <div
         className="flex w-full items-center justify-center"
